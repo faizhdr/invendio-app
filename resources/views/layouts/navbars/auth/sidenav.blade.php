@@ -5,7 +5,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href="{{ route('home') }}"
             target="_blank">
-            <img src="/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="/img/invendio-logo-nobg.png" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 mt- font-weight-bold">Invendio</span>
         </a>
     </div>
@@ -28,9 +28,27 @@
                 <a class="nav-link {{ str_contains(request()->url(), 'barang') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'barang']) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                        <i class="ni ni-box-2 text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Data Barang</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'kategori') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'kategori']) }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-folder-17 text-secondary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Kategori Barang</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ str_contains(request()->url(), 'merek') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'merek']) }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-badge text-secondary text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Merek Barang</span>
                 </a>
             </li>
             <li class="nav-item mt-3 d-flex align-items-center">
@@ -56,7 +74,7 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
-            <li class="nav-item mt-3">
+            {{-- <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
             </li>
             <li class="nav-item">
@@ -124,7 +142,7 @@
                     </div>
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
     {{-- <div class="sidenav-footer mx-3 ">

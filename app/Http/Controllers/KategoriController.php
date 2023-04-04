@@ -25,7 +25,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        //mengarahkan ke hal form input kategori
+        return view('Kategori.create');
     }
 
     /**
@@ -36,7 +37,26 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // PROSES VALIDASI DATA
+        $request->validate(
+            [
+                'kategori' => 'required',
+            ],
+            [
+                'kategori.required' => 'Kolom Kategori Barang harus diisi',
+            ]
+        );
+
+        // 1. Tangkap Request dari Create
+        DB::table('kategori')->insert(
+            [
+                'kategori' => $request->kategori,
+
+            ]
+        );
+
+        return redirect('kategori')->with('success','Data berhasil ditambahkan');
+
     }
 
     /**
@@ -58,7 +78,10 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        //mengarahkan ke halaman form edit buku
+        $data = DB::table('kategori')
+            ->where('id', '=', $id)->get();
+        return view('Kategori.edit', compact('data'));
     }
 
     /**
@@ -70,7 +93,24 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'kategori' => 'required',
+            ],
+            [
+                'kategori.required' => 'Kolom Barang harus diisi',
+            ]
+        );
+
+         // 1. Tangkap Request dari Form Update
+         DB::table('kategori')->where('id', '=', $id)->update(
+            [
+                'kategori'=>$request->kategori,
+            ]
+        );
+
+        // 2. Landing Page
+        return redirect('kategori')->with('success','Data berhasil diupdate');    
     }
 
     /**
@@ -81,6 +121,8 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Menghapus Data
+        DB::table('kategori')->where('id', $id)->delete();
+        return redirect('kategori')->with('success','Data berhasil dihapus');
     }
 }

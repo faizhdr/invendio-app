@@ -19,9 +19,9 @@ class BarangController extends Controller
             ->join('kategori', 'kategori.id', '=', 'barang.idkategori')
             ->select(
                 'barang.*',
-                'merek.nama AS merek',
-                'kategori.nama AS kat'
-            )->paginate(5);
+                'merek.merek AS merek',
+                'kategori.kategori AS kat'
+            )->get();
             
         return view('Barang.index', compact('ar_barang'));
     }
@@ -34,7 +34,7 @@ class BarangController extends Controller
     public function create()
     {
         //mengarahkan ke hal form input barang
-        return view('Barang.form');
+        return view('Barang.create');
     }
 
     /**
@@ -49,11 +49,31 @@ class BarangController extends Controller
         $request->validate(
             [
                 'nama' => 'required',
+                'idmerek'=> 'required',
+                'idkategori'=> 'required',
+                'stok' => 'required',
+                'kondisi' => 'required',
+                'keterangan' => 'required',
             ],
             [
-                'nama.required' => 'Kolom Barang harus diisi',
+                'nama.required' => 'Kolom Nama Barang harus diisi',
+                'idmerek.required' => 'Kolom Merek Barang harus diisi',
+                'idkategori.required' => 'Kolom Kategori Barang harus diisi',
+                'stok.required' => 'Kolom Stok harus diisi',
+                'kondisi.required' => 'Kolom Kondisi Barang harus diisi',
+                'keterangan.required' => 'Kolom Keterangan harus diisi',
             ]
         );
+
+        if(!empty($request->foto)){
+            $request->validate([
+                'foto' => 'image|mimes:png,jpg,jpeg,giff|max:2048'
+            ]);
+            $fileName = $request->nama.'.'.$request->foto->extension();
+            $request->foto->move(public_path('images'),$fileName);
+        }else{
+            $fileName = '';
+        }
 
         // PROSES CREATE DATA
 
@@ -61,12 +81,18 @@ class BarangController extends Controller
         DB::table('barang')->insert(
             [
                 'nama' => $request->nama,
+                'foto' => $fileName,
                 'idmerek' => $request->idmerek,
                 'idkategori' => $request->idkategori,
+                'stok' => $request->stok,
+                'kondisi' => $request->kondisi,
                 'keterangan' => $request->keterangan,
 
             ]
         );
+
+        // 2. Landing Page
+        return redirect('/barang')->with('success','Data berhasil ditambahkan');
     }
 
     /**
@@ -77,7 +103,16 @@ class BarangController extends Controller
      */
     public function show($id)
     {
-        //
+        $ar_barang = DB::table('barang') //join tabel dengan Query Builder Laravel
+            ->join('merek', 'merek.id', '=', 'barang.idmerek')
+            ->join('kategori', 'kategori.id', '=', 'barang.idkategori')
+            ->select(
+                'barang.*',
+                'merek.merek AS merek',
+                'kategori.kategori AS kat'
+            )->where('barang.id', '=', $id)->get();
+            
+        return view('Barang.show', compact('ar_barang'));
     }
 
     /**
@@ -88,7 +123,10 @@ class BarangController extends Controller
      */
     public function edit($id)
     {
-        //
+        //mengarahkan ke halaman form edit buku
+        $data = DB::table('barang')
+            ->where('id', '=', $id)->get();
+        return view('Barang.edit', compact('data'));
     }
 
     /**
@@ -100,7 +138,50 @@ class BarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // PROSES VALIDASI DATA
+        $request->validate(
+            [
+                'nama' => 'required',
+                'idmerek'=> 'required',
+                'idkategori'=> 'required',
+                'stok' => 'required',
+                'kondisi' => 'required',
+                'keterangan' => 'required',
+            ],
+            [
+                'nama.required' => 'Kolom Nama Barang harus diisi',
+                'idmerek.required' => 'Kolom Merek Barang harus diisi',
+                'idkategori.required' => 'Kolom Kategori Barang harus diisi',
+                'stok.required' => 'Kolom Stok harus diisi',
+                'kondisi.required' => 'Kolom Kondisi Barang harus diisi',
+                'keterangan.required' => 'Kolom Keterangan harus diisi',
+            ]
+        );
+
+        if(!empty($request->foto)){
+            $request->validate([
+                'foto' => 'image|mimes:png,jpg,jpeg,giff|max:2048'
+            ]);
+            $fileName = $request->nama.'.'.$request->foto->extension();
+            $request->foto->move(public_path('images'),$fileName);
+        }else{
+            $fileName = '';
+        }
+        // 1. Tangkap Request dari Form Update
+        DB::table('barang')->where('id', '=', $id)->update(
+            [
+                'nama'=>$request->nama,
+                'foto'=>$fileName,
+                'idmerek'=>$request->idmerek,
+                'idkategori'=>$request->idkategori,
+                'stok'=>$request->stok,
+                'kondisi'=>$request->kondisi,
+                'keterangan'=>$request->keterangan,
+            ]
+        );
+
+        // 2. Landing Page
+        return redirect('/barang' . '/' . $id)->with('success','Data berhasil diupdate');
     }
 
     /**
@@ -111,6 +192,8 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Menghapus Data
+        DB::table('barang')->where('id', $id)->delete();
+        return redirect('barang')->with('success','Data berhasil dihapus');
     }
 }
