@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,6 +36,16 @@ class BarangController extends Controller
     {
         //mengarahkan ke hal form input barang
         return view('Barang.create');
+    }
+
+    public function barangPDF()
+    {
+        $ar_barang = DB::table('barang')
+        ->join('merek', 'merek.id', '=', 'barang.idmerek')
+        ->join('kategori', 'kategori.id', '=', 'barang.idkategori')
+        ->select('barang.*', 'merek.merek AS merek', 'kategori.kategori AS kat')->get();
+        $pdf = PDF::loadView('Barang.daftarBarang', ['ar_barang' => $ar_barang]);
+        return $pdf->download('dataBarang.pdf');
     }
 
     /**

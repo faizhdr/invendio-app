@@ -58,6 +58,9 @@ Route::group(['middleware' => 'auth'], function () {
 	//Merek Barang
 	Route::resource('merek', MerekController::class);
 
+	Route::get('barangpdf', [BarangController::class, 'barangPDF']);
+
+
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });

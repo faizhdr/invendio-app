@@ -13,6 +13,7 @@
                         <div class="d-flex align-items-center">
                             <h6>Merek Barang</h6>
                             <a href="{{ route('merek.create') }}" type="submit" class="btn btn-primary btn-icon btn-sm ms-auto mt-3"><i class="ni ni-fat-add"></i><span> Merek Barang</span></a>
+
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">

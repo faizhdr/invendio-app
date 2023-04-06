@@ -12,6 +12,8 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <a class="btn btn-primary btn-md" href="{{ route('barang.create') }}" role="button">Tambah Barang</a>
+                        <a href="{{ url('barangpdf') }}" class="btn btn-info"><i class="fas fa-file-pdf"></i> </a>
+
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
 
