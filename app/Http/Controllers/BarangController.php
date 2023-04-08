@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class BarangController extends Controller
 {
@@ -13,18 +14,36 @@ class BarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ar_barang = DB::table('barang') //join tabel dengan Query Builder Laravel
-            ->join('merek', 'merek.id', '=', 'barang.idmerek')
-            ->join('kategori', 'kategori.id', '=', 'barang.idkategori')
-            ->select(
-                'barang.*',
-                'merek.merek AS merek',
-                'kategori.kategori AS kat'
-            )->get();
+        // $ar_barang = DB::table('barang') 
+        //     ->join('merek', 'merek.id', '=', 'barang.idmerek')
+        //     ->join('kategori', 'kategori.id', '=', 'barang.idkategori')
+        //     ->select(
+        //         'barang.*',
+        //         'merek.merek AS merek',
+        //         'kategori.kategori AS kat'
+        //     )->paginate(5);
+
+        $keyword = $request->get('keyword');
+
+        $ar_barang = DB::table('barang')
+        ->join('merek', 'merek.id', '=', 'barang.idmerek')
+        ->join('kategori', 'kategori.id', '=', 'barang.idkategori') 
+        ->where('nama', 'like', '%'.$keyword.'%')
+        ->orWhere('merek', 'like', '%'.$keyword.'%')
+        ->orWhere('kategori', 'like', '%'.$keyword.'%')
+        ->orWhere('kondisi', 'like', '%'.$keyword.'%')
+        ->orWhere('keterangan', 'like', '%'.$keyword.'%')
+        ->select(
+            'barang.*',
+            'merek.merek AS merek',
+            'kategori.kategori AS kat')
+        ->paginate(5);
+        return view('Barang.index', compact('ar_barang', 'keyword'));
+
             
-        return view('Barang.index', compact('ar_barang'));
+        // return view('Barang.index', compact('ar_barang'));
     }
 
     /**

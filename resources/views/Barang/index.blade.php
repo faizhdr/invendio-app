@@ -12,8 +12,16 @@
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <a class="btn btn-primary btn-md" href="{{ route('barang.create') }}" role="button">Tambah Barang</a>
-                        <a href="{{ url('barangpdf') }}" class="btn btn-info"><i class="fas fa-file-pdf"></i> </a>
 
+                        <form action="{{route('barang.index')}}">
+                            <div class="input-group w-50 ">
+                                <input name="keyword" type="text" value="{{Request::get('keyword')}}"
+                                class="form-control" />
+                                <div class="input-group-append">
+                                    <input type="submit" value="Filter" class="btn btn-primary">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
 
@@ -87,6 +95,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $ar_barang->links() }}
                         </div>
                     </div>
                 </div>
