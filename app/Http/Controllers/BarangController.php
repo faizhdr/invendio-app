@@ -145,6 +145,12 @@ class BarangController extends Controller
         return view('Barang.show', compact('ar_barang'));
     }
 
+    public function totalBarang()
+    {
+        $barang = Barang::count();
+        return view('pages.dashboard', compact('barang'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

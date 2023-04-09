@@ -41,6 +41,7 @@
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Gambar Barang</label>
                                 <input class="form-control" type="file" name="foto">
+                                <span class="text-warning text-sm">Harap isi kembali foto, Tidak bisa foramat .webp</span>
                             </div>
                         </div>
                         <div class="col-md-4">

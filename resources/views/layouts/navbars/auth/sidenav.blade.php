@@ -51,7 +51,7 @@
                     <span class="nav-link-text ms-1">Merek Barang</span>
                 </a>
             </li>
-            <li class="nav-item mt-3 d-flex align-items-center">
+            {{-- <li class="nav-item mt-3 d-flex align-items-center">
                 <div class="ps-4">
                     <i class="fab fa-laravel" style="color: #f4645f;"></i>
                 </div>
@@ -73,7 +73,7 @@
                     </div>
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
-            </li>
+            </li> --}}
             {{-- <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
             </li>
