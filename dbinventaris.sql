@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2023 at 03:54 AM
+-- Generation Time: Apr 11, 2023 at 04:42 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -45,10 +45,20 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id`, `nama`, `foto`, `stok`, `idmerek`, `idkategori`, `kondisi`, `keterangan`, `created_at`, `updated_at`) VALUES
-(30, 'Lampu rumah Baru', '', 12, 1, 1, 0, 'Tester barang', '2023-04-04', '2023-04-04 08:32:46'),
-(31, 'Lampu rumah', 'Lampu rumah.png', 12, 1, 1, 1, 'Tester Barang', '2023-04-04', '2023-04-04 14:00:09'),
-(32, 'Mouse Corsair', '', 12, 1, 2, 3, 'Tester Barang', '2023-04-04', '2023-04-04 14:13:40'),
-(33, 'Kursi Gaming', 'Kursi Gaming.png', 12, 2, 2, 2, 'Tester Barang', '2023-04-04', '2023-04-04 14:14:47');
+(34, 'Meja Kerja', 'Meja Kerja.png', 20, 3, 1, 1, 'Meja Kerja dari kayu', '2023-04-10', '2023-04-10 09:30:58'),
+(35, 'Filling Cabinet', 'Filling Cabinet.png', 18, 3, 1, 1, 'untuk menyimpan dokumen-dokumen penting', '2023-04-10', '2023-04-10 09:32:41'),
+(36, 'Lemari Besi', 'Lemari Besi.png', 21, 3, 1, 2, 'untuk melindungi barang-barang berharga', '2023-04-10', '2023-04-10 09:38:26'),
+(37, 'Brankas', 'Brankas.png', 17, 3, 1, 1, 'Untuk melindungi barang-barang berharga', '2023-04-11', '2023-04-11 13:52:16'),
+(38, 'Kursi Rapat', 'Kursi Rapat.png', 21, 3, 1, 1, 'Untuk kepentingan Rapat', '2023-04-11', '2023-04-11 13:52:55'),
+(39, 'Rak Besi', 'Rak Besi.png', 8, 3, 1, 1, 'Untuk barang yang ringan', '2023-04-11', '2023-04-11 13:55:16'),
+(40, 'Kursi Putar', 'Kursi Putar.png', 15, 3, 1, 1, 'Untuk ruang kantor', '2023-04-11', '2023-04-11 14:01:20'),
+(41, 'Laptop', 'Laptop.png', 10, 8, 2, 1, 'Untuk Keperluan kantor', '2023-04-11', '2023-04-11 14:02:08'),
+(42, 'Telepon Umum', 'Telepon Umum.png', 3, 3, 2, 1, 'Telepon Kantor', '2023-04-11', '2023-04-11 14:03:26'),
+(43, 'Jam dinding', 'Jam dinding.png', 4, 3, 2, 1, 'Jam dinding kantor', '2023-04-11', '2023-04-11 14:04:11'),
+(44, 'Komputer', 'Komputer.png', 5, 7, 2, 1, 'Kerja kantor tetap', '2023-04-11', '2023-04-11 14:05:12'),
+(45, 'Kamera', 'Kamera.png', 2, 5, 2, 1, 'Dokumentasi kantor', '2023-04-11', '2023-04-11 14:05:54'),
+(46, 'Printer', 'Printer.png', 4, 5, 2, 1, 'Untuk print berkas', '2023-04-11', '2023-04-11 14:06:41'),
+(47, 'Handycam', 'Handycam.png', 3, 9, 2, 1, 'Video dokumentasi', '2023-04-11', '2023-04-11 14:07:56');
 
 -- --------------------------------------------------------
 
@@ -93,7 +103,7 @@ INSERT INTO `kategori` (`id`, `kategori`) VALUES
 
 CREATE TABLE `merek` (
   `id` int(11) NOT NULL,
-  `merek` varchar(100) NOT NULL
+  `merek` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -101,8 +111,12 @@ CREATE TABLE `merek` (
 --
 
 INSERT INTO `merek` (`id`, `merek`) VALUES
-(1, 'Toshiba'),
-(2, 'LG');
+(3, '-'),
+(4, 'Panasonic'),
+(5, 'Cannon'),
+(7, 'Dell'),
+(8, 'Asus'),
+(9, 'Sony');
 
 -- --------------------------------------------------------
 
@@ -185,7 +199,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `firstname`, `lastname`, `email`, `email_verified_at`, `password`, `address`, `city`, `country`, `postal`, `about`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Admin', 'Admin', 'admin@argon.com', NULL, '$2y$10$6UVvrSJwJMC661JBfnozLu0.LNu7LCevIzcSl.nnMxLkbEm/VGk5m', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(2, 'admin', 'Admin', 'Admin', 'admin@gmail.com', NULL, '$2y$10$Kpl6GslZXB7QE3BgR6phuuTRfxxgs9cwiVPz2CSjPrnXB0aZ4Bk2W', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -253,7 +267,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -265,13 +279,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `merek`
 --
 ALTER TABLE `merek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -289,7 +303,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
