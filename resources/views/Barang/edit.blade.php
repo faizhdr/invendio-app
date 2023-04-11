@@ -9,9 +9,9 @@
     <div class="container-fluid py-4">
         <div class="card">
             @foreach ($data as $row)
-            <form role="form" method="POST" action="{{ route('barang.update', $row->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('barang.update', $row->id) }}" enctype="multipart/form-data">
                 @csrf
-                @method('put')
+                @method('patch')
                 <div class="card-header pb-0">
                     <div class="d-flex align-items-center">
                         <a href="{{ url('barang') }}" class=""><i class="fas fa-chevron-left"></i> Back</a>
@@ -92,18 +92,39 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Stok Barang</label>
                                 <input class="form-control
                                 @error('stok')
                                 is-invalid
                                 @enderror"
-                                 type="number" value="{{ old('stok',$row->stok) }}" name="stok">
-                                 @error('stok')
+                                type="number" value="{{ old('stok',$row->stok) }}" name="stok" >
+                                @error('stok')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="example-text-input" class="form-control-label">Kondisi Barang</label>
+                                <select class="form-control
+                                @error('kondisi')
+                                is-invalid
+                                @enderror" 
+                                name="kondisi">
+                                    <option selected disabled>Pilih Kondisi barang</option>
+                                    <option value="1" {{ $row->kondisi == 1 ? 'selected' : '' }}>Baik</option>
+                                    <option value="2" {{ $row->kondisi == 2 ? 'selected' : '' }}>Kurang Baik</option>
+                                    <option value="3" {{ $row->kondisi == 3 ? 'selected' : '' }}>Rusak Berat</option>
+                                </select>
+                                {{-- pesan error --}}
+                                @error('kondisi')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                 @enderror
                             </div>
                         </div>

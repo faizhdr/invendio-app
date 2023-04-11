@@ -5,8 +5,9 @@
     <div class="container-fluid py-4">
         <div class="card">
             @foreach ($data as $row)
-            <form role="form" method="POST" action="{{ route('merek.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('merek.update', $row->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 <div class="card-header pb-0">
                     <div class="d-flex align-items-center">
                         <a href="{{ url('merek') }}" class=""><i class="fas fa-chevron-left"></i> Back</a>

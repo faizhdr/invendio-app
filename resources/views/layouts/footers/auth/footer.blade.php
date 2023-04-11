@@ -8,7 +8,7 @@
                         document.write(new Date().getFullYear())
                     </script>,
                     made with <i class="fa fa-heart"></i> by
-                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Invendio Tim</a>
+                    <a href="#" class="font-weight-bold">Invendio Tim</a>
                 </div>
             </div>
         </div>

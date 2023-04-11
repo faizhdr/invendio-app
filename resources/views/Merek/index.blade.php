@@ -43,7 +43,7 @@
                                             <form action="{{ route('merek.destroy', $m->id) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
-                                                <a href="{{ route('merek.edit',$m->id) }}" class="btn btn-icon btn-success"><i class="fas fa-pen"></i></a>
+                                                <a href="{{ route('merek.edit', $m->id) }}" class="btn btn-icon btn-success"><i class="fas fa-pen"></i></a>
                                                 <button class="btn btn-icon btn-danger delete"  ><i class="fas fa-trash"></i></button>
                                             </form>
                                         </td>

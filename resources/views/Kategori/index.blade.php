@@ -42,7 +42,7 @@
                                             <form action="{{ route('kategori.destroy', $k->id) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
-                                                <a href="{{ route('kategori.edit',$k->id) }}" class="btn btn-icon btn-success"><i class="fas fa-pen"></i></a>
+                                                <a href="{{ route('kategori.edit', $k->id) }}" class="btn btn-icon btn-success"><i class="fas fa-pen"></i></a>
                                                 <button class="btn btn-icon btn-danger delete"  ><i class="fas fa-trash"></i></button>
                                             </form>
                                         </td>

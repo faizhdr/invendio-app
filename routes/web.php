@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('merek', MerekController::class);
 
 	Route::get('barangpdf', [BarangController::class, 'barangPDF']);
+	Route::get('barangcsv', [BarangController::class, 'barangCSV']);
 
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');

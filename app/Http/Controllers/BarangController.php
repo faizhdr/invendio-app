@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use PDF;
 use Illuminate\Http\Request;
+use App\Exports\BarangExport;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
@@ -16,15 +18,7 @@ class BarangController extends Controller
      */
     public function index(Request $request)
     {
-        // $ar_barang = DB::table('barang') 
-        //     ->join('merek', 'merek.id', '=', 'barang.idmerek')
-        //     ->join('kategori', 'kategori.id', '=', 'barang.idkategori')
-        //     ->select(
-        //         'barang.*',
-        //         'merek.merek AS merek',
-        //         'kategori.kategori AS kat'
-        //     )->paginate(5);
-
+        Paginator::useBootstrap();
         $keyword = $request->get('keyword');
 
         $ar_barang = DB::table('barang')
@@ -43,7 +37,6 @@ class BarangController extends Controller
         return view('Barang.index', compact('ar_barang', 'keyword'));
 
             
-        // return view('Barang.index', compact('ar_barang'));
     }
 
     /**
@@ -65,6 +58,11 @@ class BarangController extends Controller
         ->select('barang.*', 'merek.merek AS merek', 'kategori.kategori AS kat')->get();
         $pdf = PDF::loadView('Barang.daftarBarang', ['ar_barang' => $ar_barang]);
         return $pdf->download('dataBarang.pdf');
+    }
+
+    public function barangCSV()
+    {
+        return Excel::download(new BarangExport, 'barang.csv');
     }
 
     /**
@@ -217,7 +215,7 @@ class BarangController extends Controller
         );
 
         // 2. Landing Page
-        return redirect('/barang' . '/' . $id)->with('success','Data berhasil diupdate');
+        return redirect('/barang')->with('success','Data berhasil diupdate');
     }
 
     /**

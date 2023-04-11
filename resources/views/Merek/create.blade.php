@@ -4,11 +4,11 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Tambah Merek Barang'])
     <div class="container-fluid py-4">
         <div class="card">
-            <form role="form" method="POST" action="{{ route('kategori.store') }}" enctype="multipart/form-data">
+            <form role="form" method="POST" action="{{ route('merek.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="card-header pb-0">
                     <div class="d-flex align-items-center">
-                        <a href="{{ url('kategori') }}" class=""><i class="fas fa-chevron-left"></i> Back</a>
+                        <a href="{{ url('merek') }}" class=""><i class="fas fa-chevron-left"></i> Back</a>
                     </div>
                 </div>
                 <div class="card-body">

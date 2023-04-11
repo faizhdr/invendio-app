@@ -9,8 +9,9 @@
     <div class="container-fluid py-4">
         <div class="card">
             @foreach ($data as $row)
-            <form role="form" method="POST" action="{{ route('kategori.store') }}" enctype="multipart/form-data">
+            <form role="form" method="POST" action="{{ route('kategori.update', $row->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('put')
                 <div class="card-header pb-0">
                     <div class="d-flex align-items-center">
                         <a href="{{ url('kategori') }}" class=""><i class="fas fa-chevron-left"></i> Back</a>
